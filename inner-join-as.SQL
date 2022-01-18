@@ -68,3 +68,15 @@ FROM countries AS c
 WHERE year = 2010
 -- Group by region
 GROUP BY region;
+
+SELECT name AS country, code, region, basic_unit
+-- From countries
+FROM countries
+  -- Join to currencies
+  LEFT JOIN currencies
+    -- Match on code
+    USING (code)
+-- Where region is North America or null
+WHERE region = 'North America' OR region IS NULL
+-- Order by region
+ORDER BY region;
