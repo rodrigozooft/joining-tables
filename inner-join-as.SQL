@@ -35,7 +35,7 @@ Select country name AS country, the country's local name,
 the language name AS language, and
 the percent of the language spoken in the country
 */
-SELECT c.name AS country, local_name, l.name AS language, percent
+SELECT c.name AS country, local_name, percent, l.name AS language
 -- From left table (alias as c)
 FROM countries AS c
   -- Join to right table (alias as l)
@@ -44,3 +44,14 @@ FROM countries AS c
     ON c.code = l.code
 -- Order by descending country
 ORDER BY country DESC;
+
+-- Select name, region, and gdp_percapita
+SELECT name, region, gdp_percapita
+-- From countries (alias as c)
+FROM countries AS c
+  -- Left join with economies (alias as e)
+  LEFT JOIN economies AS e
+    -- Match on code fields
+    ON c.code = e.code
+-- Focus on 2010
+WHERE year = 2010;
