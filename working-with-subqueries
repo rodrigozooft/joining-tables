@@ -45,3 +45,22 @@ SELECT name, continent, inflation_rate
              WHERE year = 2015) AS subquery
       -- Group by continent
         GROUP BY continent);
+
+-- Select fields
+SELECT DISTINCT c.name, total_investment, imports
+  -- From table (with alias)
+  FROM countries AS c
+    -- Join with table (with alias)
+    LEFT JOIN economies AS e
+      -- Match on code
+      ON (c.code = e.code
+      -- and code in Subquery
+        AND c.code IN (
+          SELECT l.code
+          FROM languages AS l
+          WHERE official = 'true'
+        ) )
+  -- Where region and year are correct
+  WHERE region = 'Central America' AND year = 2015
+-- Order by field
+ORDER BY c.name;
