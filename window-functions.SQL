@@ -16,3 +16,29 @@ FROM (
   ORDER BY Year ASC
 ) AS Years
 ORDER BY Year ASC;
+
+
+SELECT
+  Year,
+  -- Assign the lowest numbers to the most recent years
+  ROW_NUMBER() OVER (ORDER BY years DESC) AS Row_N
+FROM (
+  SELECT DISTINCT Year
+  FROM Summer_Medals
+) AS Years
+ORDER BY Year;
+
+WITH Athlete_Medals AS (
+  SELECT
+    -- Count the number of medals each athlete has earned
+    Athlete,
+    COUNT(*) AS Medals
+  FROM Summer_Medals
+  GROUP BY Athlete)
+
+SELECT
+  -- Number each athlete by how many medals they've earned
+  athlete,
+  ROW_NUMBER() OVER (ORDER BY medals DESC) AS Row_N
+FROM Athlete_Medals
+ORDER BY Medals DESC;
