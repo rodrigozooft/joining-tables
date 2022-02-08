@@ -81,3 +81,23 @@ SELECT
   MIN(Medals) OVER (ORDER BY year ASC) AS Min_Medals
 FROM France_Medals
 ORDER BY Year ASC;
+
+WITH Scandinavian_Medals AS (
+  SELECT
+    Year, COUNT(*) AS Medals
+  FROM Summer_Medals
+  WHERE
+    Country IN ('DEN', 'NOR', 'FIN', 'SWE', 'ISL')
+    AND Medal = 'Gold'
+  GROUP BY Year)
+
+SELECT
+  -- Select each year's medals
+  year,
+  medals,
+  -- Get the max of the current and next years'  medals
+  MAX(medals) OVER (ORDER BY year ASC
+             ROWS BETWEEN CURRENT ROW
+             AND 1 FOLLOWING) AS Max_Medals
+FROM Scandinavian_Medals
+ORDER BY Year ASC;
