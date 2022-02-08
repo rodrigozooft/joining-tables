@@ -65,3 +65,19 @@ SELECT
                 ORDER BY year ASC) AS Max_Medals
 FROM Country_Medals
 ORDER BY Country ASC, Year ASC;
+
+WITH France_Medals AS (
+  SELECT
+    Year, COUNT(*) AS Medals
+  FROM Summer_Medals
+  WHERE
+    Country = 'FRA'
+    AND Medal = 'Gold' AND Year >= 2000
+  GROUP BY Year)
+
+SELECT
+  year,
+  Medals,
+  MIN(Medals) OVER (ORDER BY year ASC) AS Min_Medals
+FROM France_Medals
+ORDER BY Year ASC;
