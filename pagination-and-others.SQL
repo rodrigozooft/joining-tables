@@ -46,3 +46,22 @@ SELECT
   SUM(Medals) OVER (ORDER BY Athlete ASC) AS Max_Medals
 FROM Athlete_Medals
 ORDER BY Athlete ASC;
+
+WITH Country_Medals AS (
+  SELECT
+    Year, Country, COUNT(*) AS Medals
+  FROM Summer_Medals
+  WHERE
+    Country IN ('CHN', 'KOR', 'JPN')
+    AND Medal = 'Gold' AND Year >= 2000
+  GROUP BY Year, Country)
+
+SELECT
+  -- Return the max medals earned so far per country
+  year,
+  country,
+  medals,
+  MAX(medals) OVER (PARTITION BY country
+                ORDER BY year ASC) AS Max_Medals
+FROM Country_Medals
+ORDER BY Country ASC, Year ASC;
