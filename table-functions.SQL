@@ -74,3 +74,16 @@ WHERE
 -- Generate Country-level subtotals
 GROUP BY country, ROLLUP(gender)
 ORDER BY Country ASC, Gender ASC;
+
+-- Count the medals per country and medal type
+SELECT
+  gender,
+  medal,
+  COUNT(*) AS Awards
+FROM Summer_Medals
+WHERE
+  Year = 2012
+  AND Country = 'RUS'
+-- Get all possible group-level subtotals
+GROUP BY CUBE(gender, medal)
+ORDER BY Gender ASC, Medal ASC;
