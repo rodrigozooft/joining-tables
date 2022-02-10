@@ -14,3 +14,11 @@ SELECT
  	-- Calculate the expected_return_date
 	rental_date + INTERVAL '3 days' AS expected_return_date
 FROM rental;
+
+-- Select the title and special features column 
+SELECT 
+  title, 
+  special_features 
+FROM film
+-- Use the array index of the special_features column
+WHERE special_features[2] = 'Deleted Scenes';
