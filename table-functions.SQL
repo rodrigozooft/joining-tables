@@ -60,3 +60,17 @@ $$) AS ct (Country VARCHAR,
            "2012" INTEGER)
 
 Order by Country ASC;
+
+-- Count the gold medals per country and gender
+SELECT
+  country,
+  gender,
+  COUNT(*) AS Gold_Awards
+FROM Summer_Medals
+WHERE
+  Year = 2004
+  AND Medal = 'Gold'
+  AND Country IN ('DEN', 'NOR', 'SWE')
+-- Generate Country-level subtotals
+GROUP BY country, ROLLUP(gender)
+ORDER BY Country ASC, Gender ASC;
