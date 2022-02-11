@@ -29,3 +29,10 @@ SELECT
 FROM film 
 -- Modify the query to use the ANY function 
 WHERE 'Trailers' = ANY (special_features);
+
+SELECT 
+  title, 
+  special_features 
+FROM film 
+-- Filter where special_features contains 'Deleted Scenes'
+WHERE special_features @> ARRAY['Deleted Scenes'];
