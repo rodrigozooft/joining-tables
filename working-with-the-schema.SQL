@@ -36,3 +36,11 @@ SELECT
 FROM film 
 -- Filter where special_features contains 'Deleted Scenes'
 WHERE special_features @> ARRAY['Deleted Scenes'];
+
+SELECT f.title, f.rental_duration,
+    -- Calculate the number of days rented
+	AGE(r.return_date, r.rental_date) AS days_rented
+FROM film AS f
+	INNER JOIN inventory AS i ON f.film_id = i.film_id
+	INNER JOIN rental AS r ON i.inventory_id = r.inventory_id
+ORDER BY f.title;
