@@ -74,3 +74,19 @@ FROM
   	ON f.film_id = fc.film_id 
   INNER JOIN category AS c 
   	ON fc.category_id = c.category_id;
+
+-- Select all columns
+SELECT *
+FROM film
+-- Select only records that begin with the word 'GOLD'
+WHERE title LIKE 'GOLD%';
+
+SELECT *
+FROM film
+-- Select only records that end with the word 'GOLD'
+WHERE title LIKE '%GOLD';
+
+SELECT *
+FROM film
+-- Select only records that contain the word 'GOLD'
+WHERE title LIKE '%GOLD%';
