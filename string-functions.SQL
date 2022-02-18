@@ -155,4 +155,8 @@ WHERE
     inventory_held_by_customer(i.inventory_id) IS NOT NULL
 
  -- Enable the pg_trgm extension
-CREATE EXTENSION IF NOT EXISTS pg_trgm;   
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+-- Select all rows extensions
+SELECT * 
+FROM pg_extension;
