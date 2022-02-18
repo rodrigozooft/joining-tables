@@ -178,4 +178,17 @@ SELECT
   levenshtein(title, 'JET NEIGHBOR') AS distance
 FROM 
   film
-ORDER BY 3  
+ORDER BY 3
+
+SELECT 
+  title, 
+  description, 
+  -- Calculate the similarity
+  similarity(description, 'Astounding Drama')
+FROM 
+  film 
+WHERE 
+  to_tsvector(description) @@ 
+  to_tsquery('Astounding & Drama') 
+ORDER BY 
+	similarity(description, 'Astounding Drama') DESC;
