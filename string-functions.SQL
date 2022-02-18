@@ -153,3 +153,6 @@ FROM film as f
 WHERE
 	-- Only include results where the held_by_cust is not null
     inventory_held_by_customer(i.inventory_id) IS NOT NULL
+
+ -- Enable the pg_trgm extension
+CREATE EXTENSION IF NOT EXISTS pg_trgm;   
