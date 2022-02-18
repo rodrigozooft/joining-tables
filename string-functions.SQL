@@ -169,3 +169,13 @@ SELECT
   similarity(title, description)
 FROM 
   film
+
+-- Select the title and description columns
+SELECT  
+  title, 
+  description, 
+  -- Calculate the levenshtein distance
+  levenshtein(title, 'JET NEIGHBOR') AS distance
+FROM 
+  film
+ORDER BY 3  
