@@ -160,3 +160,12 @@ CREATE EXTENSION IF NOT EXISTS pg_trgm;
 -- Select all rows extensions
 SELECT * 
 FROM pg_extension;
+
+-- Select the title and description columns
+SELECT 
+  title, 
+  description, 
+  -- Calculate the similarity
+  similarity(title, description)
+FROM 
+  film
